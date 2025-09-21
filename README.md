@@ -25,6 +25,7 @@ A Model Context Protocol (MCP) server that integrates with SonarQube to provide 
 - [Configuration](#configuration)
   - [Environment Variables](#environment-variables)
   - [Authentication Methods](#authentication-methods)
+- [Parallel Development](#parallel-development)
 - [Available Tools](#available-tools)
 - [Usage Examples](#usage-examples)
 - [Architecture](#architecture)
@@ -53,6 +54,7 @@ The SonarQube MCP Server enables AI assistants to interact with SonarQube's code
 
 ### Core Guides
 - **[Architecture Guide](docs/architecture.md)** - System architecture, design decisions, and component overview
+- **[Parallel Development Guide](docs/parallel-development.md)** - Multi-instance setup for teams and concurrent development
 - **[Troubleshooting Guide](docs/troubleshooting.md)** - Common issues, debugging, and solutions
 
 ### Security & Authentication
@@ -516,6 +518,59 @@ The server supports file-based logging for debugging and monitoring. Since MCP s
 2024-01-15T10:30:50.567Z INFO [index] Successfully retrieved projects {"count": 5}
 ```
 
+## Parallel Development
+
+The SonarQube MCP Server supports multiple simultaneous instances, enabling parallel development scenarios where multiple developers or agents can work concurrently without conflicts.
+
+### Quick Setup for Multiple Instances
+
+**Multi-Project Configuration Example:**
+```json
+{
+  "mcpServers": {
+    "sonarqube-frontend": {
+      "command": "npx",
+      "args": ["-y", "sonarqube-mcp-server@latest"],
+      "env": {
+        "SONARQUBE_URL": "https://sonarcloud.io",
+        "SONARQUBE_TOKEN": "frontend-project-token",
+        "SONARQUBE_ORGANIZATION": "frontend-org",
+        "LOG_FILE": "/tmp/sonarqube-mcp-frontend.log"
+      }
+    },
+    "sonarqube-backend": {
+      "command": "npx", 
+      "args": ["-y", "sonarqube-mcp-server@latest"],
+      "env": {
+        "SONARQUBE_URL": "https://sonarcloud.io",
+        "SONARQUBE_TOKEN": "backend-project-token", 
+        "SONARQUBE_ORGANIZATION": "backend-org",
+        "LOG_FILE": "/tmp/sonarqube-mcp-backend.log"
+      }
+    }
+  }
+}
+```
+
+### Key Requirements for Parallel Instances
+
+1. **Unique Instance Names**: Each MCP server instance must have a unique name (e.g., `sonarqube-frontend`, `sonarqube-backend`)
+2. **Separate Log Files**: Use different `LOG_FILE` paths for each instance to avoid conflicts  
+3. **Independent Authentication**: Use separate tokens/credentials to avoid rate limiting
+4. **Resource Isolation**: Monitor system resources when running multiple instances
+
+### Configuration Templates
+
+Pre-built configuration templates are available in the [`config/`](config/) directory:
+
+- **Multi-Project**: Separate instances for different projects/teams
+- **Multi-Environment**: Different instances for dev/staging/prod environments  
+- **Individual Developer**: Personal developer workspace setup
+- **Team Shared**: Small team collaborative configuration
+
+### Comprehensive Guide
+
+For detailed setup instructions, best practices, troubleshooting, and team configuration strategies, see the complete [Parallel Development Guide](docs/parallel-development.md).
 
 ## Available Tools
 

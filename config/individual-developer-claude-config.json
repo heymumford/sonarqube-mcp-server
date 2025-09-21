@@ -1,0 +1,18 @@
+{
+  "mcpServers": {
+    "sonarqube-alice": {
+      "command": "npx",
+      "args": ["-y", "sonarqube-mcp-server@latest"],
+      "env": {
+        "SONARQUBE_URL": "https://sonarcloud.io",
+        "SONARQUBE_TOKEN": "ALICE_PERSONAL_TOKEN_HERE",
+        "SONARQUBE_ORGANIZATION": "alice-projects",
+        "LOG_FILE": "/tmp/sonarqube-mcp-alice.log",
+        "LOG_LEVEL": "INFO",
+        "SONARQUBE_MCP_ELICITATION": "true",
+        "SONARQUBE_MCP_BULK_THRESHOLD": "5",
+        "SONARQUBE_MCP_REQUIRE_COMMENTS": "true"
+      }
+    }
+  }
+}

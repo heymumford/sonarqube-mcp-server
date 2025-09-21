@@ -1,0 +1,18 @@
+{
+  "mcpServers": {
+    "sonarqube-team-shared": {
+      "command": "npx",
+      "args": ["-y", "sonarqube-mcp-server@latest"],
+      "env": {
+        "SONARQUBE_URL": "https://sonarcloud.io",
+        "SONARQUBE_TOKEN": "TEAM_SHARED_TOKEN_HERE",
+        "SONARQUBE_ORGANIZATION": "team-organization",
+        "LOG_FILE": "/tmp/sonarqube-mcp-team.log",
+        "LOG_LEVEL": "INFO",
+        "SONARQUBE_MCP_ELICITATION": "true",
+        "SONARQUBE_MCP_BULK_THRESHOLD": "3",
+        "SONARQUBE_MCP_REQUIRE_COMMENTS": "false"
+      }
+    }
+  }
+}

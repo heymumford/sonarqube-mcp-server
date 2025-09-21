@@ -253,6 +253,74 @@ env | grep SONARQUBE
 env | grep -E "(PROXY|SSL|TLS|NODE)"
 ```
 
+## Parallel Development Issues
+
+### Multiple Instance Configuration
+
+#### Instance Not Appearing in Claude
+
+**Cause:** Configuration conflicts or syntax errors
+
+**Solutions:**
+1. Ensure each instance has a unique name in `mcpServers`
+2. Check JSON syntax with a validator
+3. Restart Claude Desktop after configuration changes
+4. Verify all required environment variables are set
+
+#### Log File Conflicts
+
+**Cause:** Multiple instances trying to write to the same log file
+
+**Solutions:**
+1. Use unique `LOG_FILE` paths for each instance:
+   ```json
+   "LOG_FILE": "/tmp/sonarqube-mcp-{instance-name}.log"
+   ```
+2. Check file system permissions
+3. Use different directories for different developers
+
+#### Token Rate Limiting
+
+**Cause:** Multiple instances sharing the same SonarQube token
+
+**Solutions:**
+1. Use separate tokens for each instance
+2. Create project-specific tokens with minimal permissions
+3. Stagger operations to reduce concurrent API calls
+4. Monitor SonarQube API usage in admin console
+
+#### Memory/Performance Issues
+
+**Cause:** Too many concurrent instances
+
+**Solutions:**
+1. Monitor system resources (RAM, CPU)
+2. Reduce number of concurrent instances
+3. Use more specific project configurations
+4. Consider team coordination to avoid resource conflicts
+
+### Team Coordination Issues
+
+#### Configuration Confusion
+
+**Cause:** Team members using different configurations
+
+**Solutions:**
+1. Use shared configuration templates from `config/` directory
+2. Document team-specific instance naming conventions
+3. Create team configuration guide
+4. Use descriptive instance names (e.g., `sonarqube-frontend-team-a`)
+
+#### Conflicting Operations
+
+**Cause:** Multiple developers modifying same SonarQube resources
+
+**Solutions:**
+1. Use elicitation with confirmation for bulk operations
+2. Coordinate on shared resources (quality gates, etc.)
+3. Use project-based instance separation
+4. Implement team communication protocols
+
 ## Error Messages Reference
 
 | Error | Cause | Solution |

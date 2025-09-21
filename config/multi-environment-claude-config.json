@@ -1,0 +1,40 @@
+{
+  "mcpServers": {
+    "sonarqube-dev": {
+      "command": "npx",
+      "args": ["-y", "sonarqube-mcp-server@latest"],
+      "env": {
+        "SONARQUBE_URL": "https://dev-sonarqube.company.com",
+        "SONARQUBE_TOKEN": "YOUR_DEV_TOKEN_HERE",
+        "LOG_FILE": "/tmp/sonarqube-mcp-dev.log",
+        "LOG_LEVEL": "DEBUG",
+        "SONARQUBE_MCP_ELICITATION": "true",
+        "SONARQUBE_MCP_BULK_THRESHOLD": "3"
+      }
+    },
+    "sonarqube-staging": {
+      "command": "npx",
+      "args": ["-y", "sonarqube-mcp-server@latest"],
+      "env": {
+        "SONARQUBE_URL": "https://staging-sonarqube.company.com",
+        "SONARQUBE_TOKEN": "YOUR_STAGING_TOKEN_HERE",
+        "LOG_FILE": "/tmp/sonarqube-mcp-staging.log",
+        "LOG_LEVEL": "INFO",
+        "SONARQUBE_MCP_ELICITATION": "true",
+        "SONARQUBE_MCP_BULK_THRESHOLD": "5"
+      }
+    },
+    "sonarqube-prod": {
+      "command": "npx",
+      "args": ["-y", "sonarqube-mcp-server@latest"],
+      "env": {
+        "SONARQUBE_URL": "https://sonarqube.company.com",
+        "SONARQUBE_TOKEN": "YOUR_PROD_TOKEN_HERE",
+        "LOG_FILE": "/tmp/sonarqube-mcp-prod.log",
+        "LOG_LEVEL": "WARN",
+        "SONARQUBE_MCP_ELICITATION": "true",
+        "SONARQUBE_MCP_BULK_THRESHOLD": "10"
+      }
+    }
+  }
+}

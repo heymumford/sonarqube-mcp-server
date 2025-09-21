@@ -45,6 +45,27 @@ Validates documentation for:
 ./scripts/validate-docs.sh
 ```
 
+### 🔧 Configuration Validation
+
+**Script:** `validate-config.cjs`
+
+Validates Claude Desktop configuration files for parallel development:
+- JSON syntax correctness
+- Required environment variables
+- Unique instance names and log files
+- Security best practices (detects placeholder tokens)
+
+```bash
+# Validate single configuration
+node scripts/validate-config.cjs claude-config.json
+
+# Validate multiple configurations
+node scripts/validate-config.cjs config/*.json
+
+# Usage help
+node scripts/validate-config.cjs
+```
+
 ### 🔧 Terraform Validation
 
 **Script:** `validate-terraform.sh`

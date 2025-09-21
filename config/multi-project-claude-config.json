@@ -1,0 +1,30 @@
+{
+  "mcpServers": {
+    "sonarqube-frontend": {
+      "command": "npx",
+      "args": ["-y", "sonarqube-mcp-server@latest"],
+      "env": {
+        "SONARQUBE_URL": "https://sonarcloud.io",
+        "SONARQUBE_TOKEN": "YOUR_FRONTEND_TOKEN_HERE",
+        "SONARQUBE_ORGANIZATION": "your-frontend-org",
+        "LOG_FILE": "/tmp/sonarqube-mcp-frontend.log",
+        "LOG_LEVEL": "INFO",
+        "SONARQUBE_MCP_ELICITATION": "true",
+        "SONARQUBE_MCP_BULK_THRESHOLD": "5"
+      }
+    },
+    "sonarqube-backend": {
+      "command": "npx",
+      "args": ["-y", "sonarqube-mcp-server@latest"],
+      "env": {
+        "SONARQUBE_URL": "https://sonarcloud.io",
+        "SONARQUBE_TOKEN": "YOUR_BACKEND_TOKEN_HERE",
+        "SONARQUBE_ORGANIZATION": "your-backend-org",
+        "LOG_FILE": "/tmp/sonarqube-mcp-backend.log",
+        "LOG_LEVEL": "INFO",
+        "SONARQUBE_MCP_ELICITATION": "true",
+        "SONARQUBE_MCP_BULK_THRESHOLD": "5"
+      }
+    }
+  }
+}

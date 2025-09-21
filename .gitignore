@@ -17,6 +17,14 @@ coverage/
 npm-debug.log*
 pnpm-debug.log*
 
+# Parallel development configurations (contains tokens)
+config/*-actual.json
+config/*-personal.json
+config/*-team.json
+
+# Local development configurations
+claude-config-local.json
+
 # Environment variables
 .env
 .env.local
